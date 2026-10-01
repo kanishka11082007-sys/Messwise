@@ -1,0 +1,76 @@
+from typing import Optional, List, Dict, Any
+from pydantic import BaseModel, Field
+
+
+class MealItemOut(BaseModel):
+    session: str
+    menu: str
+    time: str
+    booked: bool
+    status: str
+    deadline: str
+    can_modify: bool
+    token: Optional[str] = None
+
+
+class TodayMealsResponse(BaseModel):
+    date: str
+    hostel: str
+    meals: Dict[str, MealItemOut]
+
+
+class ToggleBookingRequest(BaseModel):
+    meal_session: str
+    date: Optional[str] = None
+
+
+class ToggleBookingResponse(BaseModel):
+    meal_session: str
+    booked: bool
+    status: str
+    token: Optional[str] = None
+    co2_avoided_kg: float
+    meals_booked: int
+    cancellation_recorded: bool
+    message: str
+
+
+class FeedbackRequest(BaseModel):
+    meal_session: str
+    taste_rating: int = Field(ge=1, le=5, default=5)
+    quantity_satisfaction: int = Field(ge=1, le=5, default=5)
+    menu_rating: int = Field(ge=1, le=5, default=5)
+    finished_meal: bool = True
+    comment: Optional[str] = None
+
+
+class FeedbackResponse(BaseModel):
+    id: str
+    message: str
+    submitted_at: str
+
+
+class BookingHistoryItem(BaseModel):
+    id: str
+    date: str
+    meal: str
+    item: str
+    status: str
+    token: Optional[str] = None
+
+
+class BookingHistoryResponse(BaseModel):
+    total: int
+    items: List[BookingHistoryItem]
+
+
+class StudentImpactResponse(BaseModel):
+    student_name: str
+    hostel: str
+    meals_booked: int
+    meals_attended: int
+    timely_cancellations: int
+    estimated_surplus_avoided_kg: float
+    co2_avoided_kg: float
+    eco_rank: int
+    sustainability_streak_days: int
