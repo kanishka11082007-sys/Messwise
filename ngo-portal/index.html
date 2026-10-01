@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Messwise NGO Partner Portal - Discover fresh inspected mess surplus food, request batches, coordinate timely pickup, and serve vulnerable community shelters.">
+  <title>Messwise | NGO Partner Portal</title>
+  
+  <!-- Typography: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤝</text></svg>">
+</head>
+<body>
+
+  <div class="ngo-layout">
+
+    <!-- =======================================================================
+         LEFT SIDEBAR (MATCHING INFOGRAPHIC CARD 3)
+         ======================================================================= -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-header">
+        <div class="brand-logo">
+          <div class="logo-icon">🤝</div>
+          <div class="brand-text">
+            <h2>Messwise</h2>
+            <span class="role-pill">NGO Partner</span>
+          </div>
+        </div>
+        <button class="mobile-toggle" id="btn-sidebar-close" aria-label="Close sidebar">✕</button>
+      </div>
+
+      <div class="ngo-quick-card">
+        <div class="ngo-avatar">🏢</div>
+        <div class="ngo-info">
+          <div class="name" id="sidebar-ngo-name">Helping Hands NGO</div>
+          <div class="subtext">Verified Partner • Delhi Chapter</div>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="sidebar-nav" aria-label="NGO Navigation">
+        <button class="nav-item active" data-view="dashboard" id="nav-dashboard">
+          <span class="icon">📊</span>
+          <span class="label">Dashboard</span>
+        </button>
+        <button class="nav-item" data-view="available-food" id="nav-available-food">
+          <span class="icon">🍱</span>
+          <span class="label">Available Food</span>
+          <span class="nav-badge live">Live Feed</span>
+        </button>
+        <button class="nav-item" data-view="my-requests" id="nav-my-requests">
+          <span class="icon">📑</span>
+          <span class="label">My Requests</span>
+          <span class="nav-counter" id="badge-requests-count">4</span>
+        </button>
+        <button class="nav-item" data-view="pickups" id="nav-pickups">
+          <span class="icon">🚚</span>
+          <span class="label">Pickups</span>
+          <span class="nav-counter" id="badge-pickups-count">3</span>
+        </button>
+        <button class="nav-item" data-view="distribution" id="nav-distribution">
+          <span class="icon">❤️</span>
+          <span class="label">Distribution</span>
+          <span class="nav-badge new">Log Proof</span>
+        </button>
+        <button class="nav-item" data-view="impact" id="nav-impact">
+          <span class="icon">🌱</span>
+          <span class="label">Impact</span>
+        </button>
+        <button class="nav-item" data-view="profile" id="nav-profile">
+          <span class="icon">🏛️</span>
+          <span class="label">Organization Profile</span>
+        </button>
+        <button class="nav-item" data-view="settings" id="nav-settings">
+          <span class="icon">⚙️</span>
+          <span class="label">Settings</span>
+        </button>
+      </nav>
+
+      <!-- Portal Switcher Links & Logout -->
+      <div class="sidebar-footer">
+        <div class="switch-portals-box">
+          <span class="switch-title">Switch Ecosystem Portal:</span>
+          <div class="portal-quick-links">
+            <a href="../student-portal/index.html" class="portal-link" title="Open Student Portal">👨‍🎓 Student Portal</a>
+            <a href="../admin-portal/index.html" class="portal-link" title="Open Mess Admin Portal">👨‍🍳 Mess Admin</a>
+          </div>
+        </div>
+
+        <button class="logout-btn" id="btn-logout">
+          <span class="icon">🚪</span>
+          <span class="label">Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <!-- =======================================================================
+         MAIN WORKSPACE
+         ======================================================================= -->
+    <div class="main-wrapper">
+      
+      <!-- Top Navigation Bar -->
+      <header class="top-nav-bar">
+        <button class="hamburger-btn" id="btn-sidebar-open" aria-label="Open Navigation">☰</button>
+        <div class="greeting-bar-meta">
+          <span class="date-chip">Tue, 16 Sep 2025</span>
+          <span class="fssai-chip">🛡️ FSSAI Partner Lic: 2023-DEL-8921</span>
+        </div>
+        <div class="top-actions">
+          <button class="action-btn-primary" onclick="window.NGOApp.switchView('distribution')">
+            + Log Distribution Proof
+          </button>
+          <a href="../index.html" class="hub-btn" title="Back to Messwise Hub">🌐 All Portals</a>
+        </div>
+      </header>
+
+      <main class="content-container">
+
+        <!-- ===================================================================
+             VIEW 1: DASHBOARD (EXACT MATCH TO INFOGRAPHIC CARD 3)
+             =================================================================== -->
+        <section class="view-panel active" id="view-dashboard">
+          
+          <!-- Hero Greeting Banner (Matching Card 3) -->
+          <div class="hero-ngo-card">
+            <div class="hero-content">
+              <h1 class="hero-title">Good Afternoon, <span id="hero-ngo-title">Helping Hands NGO</span></h1>
+              <p class="hero-subtitle">Together we can eliminate hunger. 18 surplus meal donations currently ready on campus.</p>
+            </div>
+            <div class="hero-chip">
+              <span>Today: 16 Sep 2025</span>
+            </div>
+          </div>
+
+          <!-- Stats Row (Matching 18 Available Donations, 4 Pending Requests, 3 Today's Pickups, 184 People Served) -->
+          <div class="ngo-stats-grid">
+            <div class="stat-card stat-donations">
+              <div class="stat-num" id="stat-donations-val">18</div>
+              <div class="stat-lbl">Available Donations</div>
+              <div class="stat-trend">Campus Hostels A, B, C</div>
+            </div>
+
+            <div class="stat-card stat-requests">
+              <div class="stat-num" id="stat-requests-val">4</div>
+              <div class="stat-lbl">Pending Requests</div>
+              <div class="stat-trend">Awaiting Kitchen Handover</div>
+            </div>
+
+            <div class="stat-card stat-pickups">
+              <div class="stat-num" id="stat-pickups-val">3</div>
+              <div class="stat-lbl">Today's Pickups</div>
+              <div class="stat-trend">Dispatched & In-Transit</div>
+            </div>
+
+            <div class="stat-card stat-people">
+              <div class="stat-num" id="stat-people-val">184</div>
+              <div class="stat-lbl">People Served</div>
+              <div class="stat-trend">Across 3 community shelters</div>
+            </div>
+          </div>
+
+          <!-- Available Surplus Food Feed (Matching Mockup 3) -->
+          <div class="card-box" style="margin-top: 1.75rem;">
+            <div class="card-header">
+              <div class="title-with-icon">
+                <span class="card-icon">🍱</span>
+                <div>
+                  <h3>Available Surplus Food</h3>
+                  <span class="sub-caption">Freshly inspected college mess food ready for immediate insulated collection</span>
+                </div>
+              </div>
+              <button class="btn-text-link" onclick="window.NGOApp.switchView('available-food')">View All →</button>
+            </div>
+
+            <div class="surplus-food-feed-list" id="dashboard-surplus-feed">
+              
+              <!-- Food Item 1: Rajma Rice (25 meals, Hostel A • 2.3 km, Pickup before 4:00 PM) -->
+              <div class="surplus-card-row">
+                <div class="food-thumb-wrap">
+                  <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&auto=format&fit=crop&q=80" alt="Rajma Rice" class="food-thumb">
+                </div>
+                <div class="food-info-block">
+                  <h4 class="food-title">Rajma Rice</h4>
+                  <div class="food-sub-meta">
+                    <span class="food-portions"><strong>25</strong> meals</span>
+                    <span class="dot">•</span>
+                    <span class="food-location">Hostel A • 2.3 km</span>
+                  </div>
+                  <div class="food-deadline-pill">
+                    Pickup before <strong>4:00 PM</strong>
+                  </div>
+                </div>
+                <div class="food-action-block">
+                  <button class="btn-request-food" onclick="window.NGOApp.openRequestModal('surplus-1')">
+                    Request
+                  </button>
+                </div>
+              </div>
+
+              <!-- Food Item 2: Roti + Dal (40 meals, Hostel B • 3.1 km, Pickup before 5:00 PM) -->
+              <div class="surplus-card-row">
+                <div class="food-thumb-wrap">
+                  <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&auto=format&fit=crop&q=80" alt="Roti + Dal" class="food-thumb">
+                </div>
+                <div class="food-info-block">
+                  <h4 class="food-title">Roti + Dal</h4>
+                  <div class="food-sub-meta">
+                    <span class="food-portions"><strong>40</strong> meals</span>
+                    <span class="dot">•</span>
+                    <span class="food-location">Hostel B • 3.1 km</span>
+                  </div>
+                  <div class="food-deadline-pill">
+                    Pickup before <strong>5:00 PM</strong>
+                  </div>
+                </div>
+                <div class="food-action-block">
+                  <button class="btn-request-food" onclick="window.NGOApp.openRequestModal('surplus-2')">
+                    Request
+                  </button>
+                </div>
+              </div>
+
+              <!-- Food Item 3: Veg Biryani (30 meals, Hostel A • 2.8 km, Pickup before 3:30 PM) -->
+              <div class="surplus-card-row">
+                <div class="food-thumb-wrap">
+                  <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&auto=format&fit=crop&q=80" alt="Veg Biryani" class="food-thumb">
+                </div>
+                <div class="food-info-block">
+                  <h4 class="food-title">Veg Biryani</h4>
+                  <div class="food-sub-meta">
+                    <span class="food-portions"><strong>30</strong> meals</span>
+                    <span class="dot">•</span>
+                    <span class="food-location">Hostel A • 2.8 km</span>
+                  </div>
+                  <div class="food-deadline-pill">
+                    Pickup before <strong>3:30 PM</strong>
+                  </div>
+                </div>
+                <div class="food-action-block">
+                  <button class="btn-request-food" onclick="window.NGOApp.openRequestModal('surplus-3')">
+                    Request
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Bottom Slogan Banner (Exact match from Infographic Card 3) -->
+          <div class="slogan-banner-ngo">
+            <span class="slogan-hands">🤝</span>
+            <span class="slogan-quote">“Food Today, Hope for a Better Tomorrow”</span>
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             VIEW 2: AVAILABLE FOOD CATALOG & FILTER
+             =================================================================== -->
+        <section class="view-panel" id="view-available-food">
+          <div class="view-header-bar">
+            <div>
+              <h2>Browse All Campus Surplus Food</h2>
+              <p>Filter by distance, pickup urgency, and food container specifications.</p>
+            </div>
+          </div>
+
+          <div class="filter-controls-row">
+            <div class="filter-group">
+              <label>Hostel Zone:</label>
+              <select class="select-filter" id="filter-hostel-zone" onchange="window.NGOApp.renderCatalog()">
+                <option value="all">All Hostels (A, B, C)</option>
+                <option value="Hostel A">Hostel A (North Campus)</option>
+                <option value="Hostel B">Hostel B (South Campus)</option>
+                <option value="Hostel C">Hostel C (Girls Wing)</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Max Distance:</label>
+              <select class="select-filter" id="filter-max-distance" onchange="window.NGOApp.renderCatalog()">
+                <option value="10">Within 10 km</option>
+                <option value="3">Within 3 km</option>
+                <option value="2">Within 2 km</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="catalog-grid" id="full-catalog-grid">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 3: MY REQUESTS & TRACKING TIMELINE
+             =================================================================== -->
+        <section class="view-panel" id="view-my-requests">
+          <div class="view-header-bar">
+            <div>
+              <h2>My Active Food Requests & Status</h2>
+              <p>Track request approval from mess supervisors and get your pickup verification OTP.</p>
+            </div>
+          </div>
+
+          <div class="requests-list" id="ngo-requests-list">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 4: PICKUP MANAGEMENT & OTP CODES
+             =================================================================== -->
+        <section class="view-panel" id="view-pickups">
+          <div class="view-header-bar">
+            <div>
+              <h2>Pickup Coordination & Mess Gate Verification</h2>
+              <p>Show this verification code to the mess supervisor when your van arrives at the kitchen loading dock.</p>
+            </div>
+          </div>
+
+          <div class="pickups-grid" id="pickups-coordination-grid">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 5: DISTRIBUTION & PHOTO PROOF LOGGER
+             =================================================================== -->
+        <section class="view-panel" id="view-distribution">
+          <div class="view-header-bar">
+            <div>
+              <h2>Record Distribution & Transparent Beneficiary Proof</h2>
+              <p>Log the community shelter, number of people nourished, and upload proof for audit reporting.</p>
+            </div>
+          </div>
+
+          <div class="distribution-form-grid">
+            <div class="card-box">
+              <h3>Log Beneficiary Distribution</h3>
+              <form id="form-log-distribution" onsubmit="event.preventDefault(); window.NGOApp.submitDistribution();">
+                <div class="form-group-ngo">
+                  <label>Surplus Batch Distributed</label>
+                  <select class="form-control" id="dist-batch-select">
+                    <option value="Rajma Rice">Rajma Rice (25 portions)</option>
+                    <option value="Roti + Dal Makhani">Roti + Dal Makhani (40 portions)</option>
+                    <option value="Veg Dum Biryani">Veg Dum Biryani (30 portions)</option>
+                  </select>
+                </div>
+
+                <div class="form-group-ngo">
+                  <label>Number of People Nourished / Meals Served</label>
+                  <input type="number" class="form-control" id="dist-people-count" value="25" min="1" required>
+                </div>
+
+                <div class="form-group-ngo">
+                  <label>Shelter / Community Location</label>
+                  <input type="text" class="form-control" id="dist-location-input" value="Kalyanpuri Labor Cluster Shelter #4" required>
+                </div>
+
+                <div class="form-group-ngo">
+                  <label>Volunteer Distribution In-Charge</label>
+                  <input type="text" class="form-control" id="dist-volunteer-input" value="Rakesh Verma (+91 98112 34567)">
+                </div>
+
+                <div class="photo-upload-mock">
+                  <div class="upload-icon">📷</div>
+                  <div class="upload-text">
+                    <strong>Upload Photo Proof of Distribution</strong>
+                    <span>Geo-tagged timestamp automatically logged</span>
+                  </div>
+                  <input type="file" style="display: none;" id="dist-photo-file">
+                  <button type="button" class="btn-sm-upload" onclick="document.getElementById('dist-photo-file').click();">Browse Photo</button>
+                </div>
+
+                <button type="submit" class="btn-action-primary full" style="margin-top: 1rem;">
+                  ❤️ Confirm Distribution & Update Live Impact
+                </button>
+              </form>
+            </div>
+
+            <!-- Recent Verified Distributions -->
+            <div class="card-box">
+              <h3>Recent Verified Distributions</h3>
+              <div class="distributions-history-list" id="distributions-history-container">
+                <!-- Populated via JS -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 6: IMPACT & TRANSPARENCY
+             =================================================================== -->
+        <section class="view-panel" id="view-impact">
+          <div class="view-header-bar">
+            <div>
+              <h2>Cumulative Philanthropic & Ecological Impact</h2>
+              <p>Real-time statistics demonstrating food rescued and carbon emissions averted.</p>
+            </div>
+          </div>
+
+          <div class="ngo-stats-grid">
+            <div class="stat-card">
+              <div class="stat-num" id="total-meals-rescued-val">4,320</div>
+              <div class="stat-lbl">Total Meals Rescued</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num" id="total-beneficiaries-val">4,190</div>
+              <div class="stat-lbl">People Nourished</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num" id="total-co2-diverted-val">648 kg</div>
+              <div class="stat-lbl">CO₂ Emissions Diverted</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">100%</div>
+              <div class="stat-lbl">FSSAI Hygiene Compliance</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 7: ORGANIZATION PROFILE
+             =================================================================== -->
+        <section class="view-panel" id="view-profile">
+          <div class="view-header-bar">
+            <div>
+              <h2>Organization Profile & NGO Verification</h2>
+              <p>Verified NGO credentials ensuring legal compliance and trust.</p>
+            </div>
+          </div>
+
+          <div class="card-box" style="max-width: 680px;">
+            <div class="profile-header-ngo">
+              <div class="ngo-logo-big">🤝</div>
+              <div>
+                <h3>Helping Hands NGO (Campus Chapter)</h3>
+                <p>Registration: NGO-DEL-2022-7719 • FSSAI Food Recovery Partner</p>
+                <span class="badge-status-approved">Verified Gold Partner ✓</span>
+              </div>
+            </div>
+
+            <div class="form-group-ngo" style="margin-top: 1.25rem;">
+              <label>Director / Point of Contact</label>
+              <input type="text" class="form-control" value="Dr. Sunita Rao" readonly>
+            </div>
+
+            <div class="form-group-ngo">
+              <label>Dispatch Fleet Capacity</label>
+              <input type="text" class="form-control" value="2 Insulated Electric Vans + 4 Volunteer Two-Wheelers" readonly>
+            </div>
+
+            <div class="form-group-ngo">
+              <label>Primary Beneficiary Communities</label>
+              <input type="text" class="form-control" value="Railway Colony Shelters, Migrant Worker Clusters, Old Age Home Sector 4" readonly>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 8: SETTINGS
+             =================================================================== -->
+        <section class="view-panel" id="view-settings">
+          <div class="view-header-bar">
+            <div>
+              <h2>Notification & Fleet Settings</h2>
+              <p>Configure automated alerts when fresh food is published within 5km.</p>
+            </div>
+          </div>
+
+          <div class="card-box" style="max-width: 680px;">
+            <div class="form-group-ngo">
+              <label>Automated WhatsApp / SMS Alerts</label>
+              <select class="form-control">
+                <option selected>Instant Notification (Any batch > 20 meals)</option>
+                <option>Only within 3km</option>
+                <option>Disabled</option>
+              </select>
+            </div>
+            <button class="btn-action-primary" onclick="alert('Settings saved!')">Save Preferences</button>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: FOOD REQUEST POPUP
+       ========================================================================= -->
+  <div class="modal-backdrop" id="modal-request">
+    <div class="modal-card">
+      <button class="modal-close" id="btn-close-request">✕</button>
+      <div class="modal-title-row">
+        <span class="logo-icon">🍲</span>
+        <h3>Request Surplus Batch</h3>
+      </div>
+      
+      <div class="batch-summary-box">
+        <h4 id="req-modal-title">Rajma Rice (25 meals)</h4>
+        <p id="req-modal-hostel">Hostel A • Pickup before 4:00 PM</p>
+        <span class="badge-fssai-stamp">🛡️ Insulated Vessel • Safe Consumption Window</span>
+      </div>
+
+      <div class="form-group-ngo">
+        <label>Designated Volunteer Name</label>
+        <input type="text" class="form-control" id="req-volunteer-name" value="Rakesh Verma">
+      </div>
+
+      <div class="form-group-ngo">
+        <label>Assigned Vehicle Type</label>
+        <select class="form-control" id="req-vehicle-select">
+          <option value="Electric Insulated Van (DL-04-EV-8821)" selected>Electric Insulated Van (DL-04-EV-8821)</option>
+          <option value="Two-wheeler with Thermal Box">Two-wheeler with Thermal Box</option>
+        </select>
+      </div>
+
+      <div class="form-group-ngo">
+        <label>Estimated Arrival ETA</label>
+        <select class="form-control" id="req-eta-select">
+          <option value="Within 25 minutes" selected>Within 25 minutes</option>
+          <option value="Within 45 minutes">Within 45 minutes</option>
+          <option value="Within 1 hour">Within 1 hour</option>
+        </select>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btn-cancel-request">Cancel</button>
+        <button class="btn-action-primary" id="btn-submit-request">Submit Request to Mess Admin</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared Store -->
+  <script src="../shared/shared-data.js"></script>
+  <!-- NGO App Script -->
+  <script src="app.js"></script>
+</body>
+</html>

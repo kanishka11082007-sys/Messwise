@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Messwise - Unified Smart Food-Waste Management Ecosystem connecting Students, Mess Supervisors, and Verified NGOs.">
+  <title>Messwise | Campus Food Ecosystem Hub</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍱</text></svg>">
+
+  <style>
+    :root {
+      --canvas-bg: #edf2e8;
+      --canvas-subtle: #f4f7f0;
+      --card-bg: #ffffff;
+      
+      --forest-900: #1a2e20;
+      --forest-800: #283e2e;
+      --forest-700: #35533e;
+      --forest-600: #44684f;
+      --forest-500: #57745e;
+      --forest-400: #6d8c74;
+      --forest-200: #c2d8c7;
+      --forest-100: #e2ece4;
+      --forest-50: #f0f5f1;
+
+      --tint-celadon: #eaf2ec;
+      --tint-mint: #eaf3f5;
+      --tint-butter: #f6f4e1;
+      --tint-lilac: #edf1fa;
+
+      --text-main: #1d3324;
+      --text-sub: #55685a;
+      --text-muted: #748879;
+      
+      --border-sage: #d6e2d4;
+      --shadow-pill: 3px 4px 0px #283e2e;
+      --radius: 20px;
+      --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--canvas-bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(rgba(87, 116, 94, 0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .hero-header {
+      padding: 4rem 2rem 2.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #ffffff;
+      border: 1px solid var(--border-sage);
+      padding: 0.35rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--forest-800);
+      margin-bottom: 1.25rem;
+      box-shadow: 2px 2px 0px rgba(40, 62, 46, 0.15);
+    }
+
+    .hero-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--forest-800);
+      margin-bottom: 0.75rem;
+      text-shadow: 0 2px 4px rgba(40, 62, 46, 0.08);
+    }
+
+    .hero-title span {
+      color: var(--forest-600);
+      font-weight: 700;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-sub);
+      max-width: 680px;
+      margin: 0 auto;
+      font-weight: 500;
+    }
+
+    .hub-container {
+      max-width: 1240px;
+      margin: 1.5rem auto 4rem;
+      padding: 0 1.5rem;
+    }
+
+    /* 3 Main Portal Cards */
+    .portals-showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .portal-launch-card {
+      border-radius: var(--radius);
+      border: 1px solid rgba(40, 62, 46, 0.2);
+      overflow: hidden;
+      box-shadow: var(--shadow-pill);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .portal-launch-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 5px 7px 0px #283e2e;
+    }
+
+    /* Soft Pastel Palette matching slide tints */
+    .card-student { background: var(--tint-celadon); }
+    .card-admin { background: var(--tint-mint); }
+    .card-ngo { background: var(--tint-butter); }
+
+    .portal-card-body {
+      padding: 2rem 1.75rem 1.75rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .portal-icon-box {
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 1.25rem;
+      background: #ffffff;
+      border: 1px solid var(--border-sage);
+      box-shadow: 2px 2px 0px rgba(40, 62, 46, 0.15);
+    }
+
+    .portal-number-badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--forest-800);
+      margin-bottom: 0.35rem;
+    }
+
+    .portal-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--forest-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .portal-tagline {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-sub);
+      margin-bottom: 1.15rem;
+    }
+
+    .portal-folder-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: monospace;
+      font-size: 0.78rem;
+      background: #ffffff;
+      border: 1px solid var(--border-sage);
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      color: var(--forest-800);
+      margin-bottom: 1.35rem;
+      box-shadow: 1px 1px 0px rgba(40, 62, 46, 0.1);
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-bottom: 1.75rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      font-size: 0.88rem;
+      color: var(--forest-900);
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .feature-list li span {
+      font-weight: 800;
+      color: var(--forest-800);
+    }
+
+    .btn-launch {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      padding: 0.85rem 1.25rem;
+      border-radius: 12px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 0.98rem;
+      transition: var(--transition);
+      text-align: center;
+      background: var(--forest-800);
+      color: #ffffff;
+      box-shadow: 2px 3px 0px #1a2e20;
+    }
+
+    .btn-launch:hover {
+      background: var(--forest-900);
+      transform: translateY(-2px);
+    }
+
+    /* Shared state live panel */
+    .shared-sync-bar {
+      background: #ffffff;
+      border: 1px solid var(--border-sage);
+      border-radius: 16px;
+      padding: 1.25rem 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 2px 3px 0px rgba(40, 62, 46, 0.15);
+    }
+
+    .shared-sync-text strong {
+      display: block;
+      color: var(--forest-800);
+      font-size: 1rem;
+    }
+
+    .shared-sync-text p {
+      font-size: 0.82rem;
+      color: var(--text-sub);
+    }
+
+    .btn-reset-store {
+      background: var(--canvas-subtle);
+      border: 1px solid var(--border-sage);
+      padding: 0.55rem 1.15rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--forest-800);
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 1px 2px 0px rgba(40, 62, 46, 0.15);
+    }
+
+    .btn-reset-store:hover {
+      background: #fee2e2;
+      color: #b91c1c;
+      border-color: #fca5a5;
+    }
+
+    @media (max-width: 992px) {
+      .portals-showcase-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Header -->
+  <header class="hero-header">
+    <div class="hero-badge">
+      <span>🍱</span> Smart Campus Food-Waste Management Ecosystem
+    </div>
+    <h1 class="hero-title">Messwise <span>Ecosystem</span></h1>
+    <p class="hero-subtitle">
+      Predict demand, scale kitchen production, inspect food safety, and redistribute surplus food to community shelters.
+    </p>
+  </header>
+
+  <!-- Hub Main Container -->
+  <main class="hub-container">
+
+    <!-- 3 Portals Launch Grid -->
+    <div class="portals-showcase-grid">
+
+      <!-- PORTAL 1: STUDENT PORTAL -->
+      <div class="portal-launch-card card-student">
+        <div class="portal-card-body">
+          <div class="portal-icon-box">👨‍🎓</div>
+          <span class="portal-number-badge">Portal #1</span>
+          <h2 class="portal-title">Student Portal</h2>
+          <p class="portal-tagline">Book Smart • Eat Smart • Reduce Waste • Make an Impact</p>
+          
+          <div class="portal-folder-pill">
+            📁 Folder: <strong>/student-portal</strong>
+          </div>
+
+          <ul class="feature-list">
+            <li><span>✓</span> Personal Dashboard with daily meal status</li>
+            <li><span>✓</span> 1-Click Meal Booking & Instant QR Token Pass</li>
+            <li><span>✓</span> Today's Menu & Nutritional Rating</li>
+            <li><span>✓</span> Surplus Food Claiming near hostel</li>
+            <li><span>✓</span> Personal CO₂ & Green Campus Rank Scoreboard</li>
+          </ul>
+
+          <a href="student-portal/index.html" class="btn-launch">
+            Launch Student Portal →
+          </a>
+        </div>
+      </div>
+
+      <!-- PORTAL 2: MESS / ADMIN PORTAL -->
+      <div class="portal-launch-card card-admin">
+        <div class="portal-card-body">
+          <div class="portal-icon-box">👨‍🍳</div>
+          <span class="portal-number-badge">Portal #2</span>
+          <h2 class="portal-title">Mess / Admin Portal</h2>
+          <p class="portal-tagline">Predict Demand • Manage Production • Track Surplus • See Impact</p>
+
+          <div class="portal-folder-pill">
+            📁 Folder: <strong>/admin-portal</strong>
+          </div>
+
+          <ul class="feature-list">
+            <li><span>✓</span> Daily Prep, Served, Surplus & Waste KPIs</li>
+            <li><span>✓</span> XGBoost AI Demand Forecasting Simulator</li>
+            <li><span>✓</span> Meal Production & Batch Leftover Logger</li>
+            <li><span>✓</span> FSSAI Certified Surplus Food Publisher</li>
+            <li><span>✓</span> NGO Request Approval & Handover OTP Verifier</li>
+          </ul>
+
+          <a href="admin-portal/index.html" class="btn-launch">
+            Launch Mess Admin Portal →
+          </a>
+        </div>
+      </div>
+
+      <!-- PORTAL 3: NGO PARTNER PORTAL -->
+      <div class="portal-launch-card card-ngo">
+        <div class="portal-card-body">
+          <div class="portal-icon-box">🤝</div>
+          <span class="portal-number-badge">Portal #3</span>
+          <h2 class="portal-title">NGO Partner Portal</h2>
+          <p class="portal-tagline">Find Surplus • Request Food • Coordinate Pickup • Serve People</p>
+
+          <div class="portal-folder-pill">
+            📁 Folder: <strong>/ngo-portal</strong>
+          </div>
+
+          <ul class="feature-list">
+            <li><span>✓</span> Live Surplus Food Feed & Campus Geo-Filters</li>
+            <li><span>✓</span> 1-Click Food Request Modal with Volunteer/Vehicle</li>
+            <li><span>✓</span> Request Tracking & 4-Digit Pickup OTP Code</li>
+            <li><span>✓</span> Distribution Logger with Geo-photo Proof</li>
+            <li><span>✓</span> Cumulative Beneficiaries & Hunger Relief Impact</li>
+          </ul>
+
+          <a href="ngo-portal/index.html" class="btn-launch">
+            Launch NGO Partner Portal →
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Reactive Shared Store Bar -->
+    <div class="shared-sync-bar">
+      <div class="shared-sync-text">
+        <strong>⚡ Unified Cross-Portal Reactive Store</strong>
+        <p>All three portals share real-time state via <code>shared/shared-data.js</code>. Changes made in any portal instantly sync across all tabs!</p>
+      </div>
+      <button class="btn-reset-store" onclick="if(window.MesswiseStore){ window.MesswiseStore.reset(); alert('Shared data reset to defaults!'); }">
+        ↺ Reset Demo Data
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Shared Store -->
+  <script src="shared/shared-data.js"></script>
+</body>
+</html>
