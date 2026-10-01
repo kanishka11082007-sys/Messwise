@@ -1,0 +1,14 @@
+{
+  "name": "messwise-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev:student": "npm --prefix student-portal run dev",
+    "dev:admin": "npm --prefix admin-portal run dev",
+    "dev:ngo": "npm --prefix ngo-portal run dev",
+    "dev:all-portals": "npm --prefix frontend run dev",
+    "build:student": "npm --prefix student-portal run build",
+    "build:admin": "npm --prefix admin-portal run build",
+    "build:ngo": "npm --prefix ngo-portal run build"
+  }
+}

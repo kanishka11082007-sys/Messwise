@@ -231,6 +231,50 @@
           this.notify();
         }
       });
+      // Initial background sync with FastAPI backend
+      setTimeout(() => this.syncFromBackend(), 100);
+    }
+
+    async syncFromBackend() {
+      if (typeof window === 'undefined' || !window.MesswiseApi) return;
+      try {
+        const [mealsData, statsData, surplusData, requestsData] = await Promise.allSettled([
+          window.MesswiseApi.getStudentMeals(),
+          window.MesswiseApi.getAdminStats(),
+          window.MesswiseApi.getAvailableSurplus(),
+          window.MesswiseApi.getNgoRequests()
+        ]);
+
+        let changed = false;
+        if (mealsData.status === 'fulfilled' && mealsData.value && mealsData.value.meals) {
+          this.state.student.todayBookings = {
+            breakfast: mealsData.value.meals.breakfast || this.state.student.todayBookings.breakfast,
+            lunch: mealsData.value.meals.lunch || this.state.student.todayBookings.lunch,
+            dinner: mealsData.value.meals.dinner || this.state.student.todayBookings.dinner
+          };
+          changed = true;
+        }
+        if (statsData.status === 'fulfilled' && statsData.value && statsData.value.today_stats) {
+          this.state.messAdmin.todayStats = statsData.value.today_stats;
+          changed = true;
+        }
+        if (surplusData.status === 'fulfilled' && surplusData.value && Array.isArray(surplusData.value.items)) {
+          if (surplusData.value.items.length > 0) {
+            this.state.surplusListings = surplusData.value.items;
+            changed = true;
+          }
+        }
+        if (requestsData.status === 'fulfilled' && requestsData.value && Array.isArray(requestsData.value)) {
+          this.state.requests = requestsData.value;
+          changed = true;
+        }
+
+        if (changed) {
+          this.save(this.state);
+        }
+      } catch (err) {
+        // Fallback to local cache silently
+      }
     }
 
     load() {
@@ -304,6 +348,12 @@
       }
 
       this.save(state);
+
+      // Async sync with FastAPI backend if available
+      if (typeof window !== 'undefined' && window.MesswiseApi) {
+        window.MesswiseApi.toggleStudentBooking(mealType).catch(() => {});
+      }
+
       return current;
     }
 
@@ -337,6 +387,21 @@
       state.ngoPartner.stats.availableDonations += 1;
 
       this.save(state);
+
+      if (typeof window !== 'undefined' && window.MesswiseApi) {
+        window.MesswiseApi.publishSurplus({
+          title: newItem.title,
+          meals: newItem.meals,
+          temp_celsius: newItem.tempCelsius,
+          location_detail: newItem.locationDetail,
+          pickup_deadline: newItem.pickupDeadline,
+          storage_condition: newItem.storageCondition,
+          food_type: newItem.foodType,
+          dietary: newItem.dietary,
+          image_url: newItem.imageUrl
+        }).catch(() => {});
+      }
+
       return newItem;
     }
 
@@ -367,6 +432,15 @@
       state.requests.unshift(newReq);
       state.ngoPartner.stats.pendingRequests += 1;
       this.save(state);
+
+      if (typeof window !== 'undefined' && window.MesswiseApi) {
+        window.MesswiseApi.requestSurplus(listing.id, {
+          volunteer_name: newReq.volunteerName,
+          vehicle: newReq.vehicle,
+          eta: newReq.pickupTimeEstimated
+        }).catch(() => {});
+      }
+
       return newReq;
     }
 
@@ -379,6 +453,10 @@
         const listing = state.surplusListings.find(s => s.id === req.surplusId);
         if (listing) listing.status = "Ready For Pickup";
         this.save(state);
+
+        if (typeof window !== 'undefined' && window.MesswiseApi) {
+          window.MesswiseApi.approveRequest(requestId).catch(() => {});
+        }
       }
     }
 
@@ -401,6 +479,11 @@
       state.messAdmin.todayStats.surplus = Math.max(0, state.messAdmin.todayStats.surplus - req.meals);
 
       this.save(state);
+
+      if (typeof window !== 'undefined' && window.MesswiseApi) {
+        window.MesswiseApi.verifyHandover(requestId, enteredOtp).catch(() => {});
+      }
+
       return { success: true, message: `Successfully verified! ${req.meals} meals handed over for redistribution.` };
     }
 
@@ -425,6 +508,15 @@
       state.student.mealsSaved += 1;
 
       this.save(state);
+
+      if (typeof window !== 'undefined' && window.MesswiseApi) {
+        window.MesswiseApi.logDistribution({
+          food_title: newDist.foodTitle,
+          beneficiaries_served: newDist.beneficiariesServed,
+          location: newDist.location
+        }).catch(() => {});
+      }
+
       return newDist;
     }
 
